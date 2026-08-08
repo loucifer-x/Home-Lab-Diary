@@ -1,6 +1,6 @@
 # Proxmox Homelab
 
-## Day 2 — System UI
+## Day 2 — System UI & Git Setup
 
 Going into this project, I already had a good idea of where I wanted to start. I have a spare HDMI touchscreen lying around, and I want to use it as my main **HUB UI**, displaying information such as the IP address, CPU usage, memory usage, and other system statistics.
 
