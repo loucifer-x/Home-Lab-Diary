@@ -101,4 +101,3 @@ This gives me a simple workflow 🔄: edit in my code editor → push to GitHub 
 
 With the dashboard now running automatically as a system service, and Git set up for managing the project, the **basic system UI is in place**. 🎉
 
-**Next up:** kiosk-mode display on the touchscreen 🖼️
