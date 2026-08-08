@@ -19,6 +19,8 @@ My current build consists of:
 
 This should give me enough resources to get Proxmox VE installed and start experimenting with virtual machines and containers.
 
+---
+
 ## Installing Proxmox VE & Setup
 
 Install Proxmox is pretty self explanatory. It's really similar to other operating systems. I used ```https://www.youtube.com/watch?v=2D5ZLWF8d7E``` as an guide to get it started!
