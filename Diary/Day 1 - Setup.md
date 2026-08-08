@@ -22,4 +22,4 @@ This should give me enough resources to get Proxmox VE installed and start exper
 ## Installing Proxmox VE & Setup
 
 Install Proxmox is pretty self explanatory. It's really similar to other operating systems. I used ```https://www.youtube.com/watch?v=2D5ZLWF8d7E``` as an guide to get it started!
-Going into this project I already have a clue of where I wanna start. I have a spare HDMI Touch screen laying around. I want this to be my HUB ui displaying, ip address, CPU ussage, memory ect.
+Going into this project I already have a clue of where I wanna start. I have a spare HDMI Touch screen laying around. I want this to be my HUB ui displaying, ip address, CPU ussage, memory ect. I asked claude AI to generate a simple UI. the project is here **https://github.com/loucifer-x/dashboard**
