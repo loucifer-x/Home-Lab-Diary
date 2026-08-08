@@ -1,6 +1,6 @@
 # Proxmox Homelab
 
-## Day 1 — Hardware Setup & Installing Proxmox VE
+## Day 1 — Hardware 
 
 I decided to put together a Proxmox server using some old hardware I had lying around. This gives me a decent starting point for building my own homelab and experimenting with virtualization, networking, and self-hosted services.
 
@@ -18,3 +18,7 @@ My current build consists of:
 * **SSD:** Samsung 840 EVO 500 GB
 
 This should give me enough resources to get Proxmox VE installed and start experimenting with virtual machines and containers.
+
+## Installing Proxmox VE
+
+Install proxmox is pretty self explainitory. It's really similar to other operating systems. I used ```https://www.youtube.com/watch?v=2D5ZLWF8d7E``` as an guide to get it started!
