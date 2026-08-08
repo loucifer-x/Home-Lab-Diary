@@ -4,7 +4,8 @@
 
 I decided to put together a Proxmox server using some old hardware I had lying around. This gives me a decent starting point for building my own homelab and experimenting with virtualization, networking, and self-hosted services.
 
-The hardware is fairly limited by today's standards, but I don't think that will be an issue to start with. One of the goals of this project is to see how much I can get out of the hardware I already have before considering any upgrades.
+The hardware is fairly limited by today's standards, but I don't think that will be an issue to start with. 
+
 ### Hardware
 
 My current build consists of:
