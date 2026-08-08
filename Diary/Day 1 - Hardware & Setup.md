@@ -37,7 +37,4 @@ The installation process is straightforward and follows a similar flow to instal
 
 ---
 
-📺 [**Proxmox VE Installation Guide**](https://www.youtube.com/watch?v=2D5ZLWF8d7E)
-
----
 
