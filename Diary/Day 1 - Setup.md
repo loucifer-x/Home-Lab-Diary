@@ -48,3 +48,4 @@ sudo systemctl daemon-reload
 sudo systemctl enable dashboard.service
 sudo systemctl start dashboard.service
 ```
+Mental note ```sudo journalctl -u dashboard.service -f``` to see the errors from the python file.
