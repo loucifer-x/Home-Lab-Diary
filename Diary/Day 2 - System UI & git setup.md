@@ -1,5 +1,5 @@
-# 🖥️ Proxmox Homelab
-## 🚀 Day 2 — System UI & Git Setup
+# Proxmox Homelab
+## Day 2 — System UI & Git Setup
 
 ![Proxmox](https://img.shields.io/badge/Proxmox-E57000?style=flat&logo=proxmox&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
@@ -8,32 +8,27 @@
 
 ---
 
-### 📺 The Idea
+### Overview
 
-Going into this project, I already had a good idea of where I wanted to start. I have a spare HDMI touchscreen lying around, and I want to use it as my main **HUB UI** 🧭 — displaying information such as:
+With the hardware and base Proxmox installation in place, the next step was to build a simple system dashboard for a spare HDMI touchscreen. The goal was to have it display key system stats — IP address, CPU usage, memory usage, and other metrics — and run automatically on boot.
 
-- 🌐 IP address
-- ⚙️ CPU usage
-- 🧠 Memory usage
-- 📊 Other system statistics
+The dashboard UI itself was generated with the assistance of Claude AI. The project source is available here:
 
-I asked Claude AI to generate a simple UI for me. The project can be found on GitHub:
-
-🔗 [**GitHub — loucifer-x/dashboard**](https://github.com/loucifer-x/dashboard)
+[GitHub — loucifer-x/dashboard](https://github.com/loucifer-x/dashboard)
 
 ---
 
-### 🔁 Auto-Start on Boot
+### Running the Dashboard on Boot
 
-The next goal was to have the dashboard automatically start when the system boots. This was fairly straightforward using a **systemd service**.
+To have the dashboard start automatically at boot, it was configured as a `systemd` service.
 
-**1️⃣ Create the service file:**
+**1. Create the service file:**
 
 ```bash
 sudo nano /etc/systemd/system/dashboard.service
 ```
 
-**2️⃣ Add the following:**
+**2. Define the service:**
 
 ```ini
 [Unit]
@@ -52,7 +47,7 @@ User=root
 WantedBy=multi-user.target
 ```
 
-**3️⃣ Enable and start the service:**
+**3. Enable and start the service:**
 
 ```bash
 sudo systemctl daemon-reload
@@ -60,18 +55,19 @@ sudo systemctl enable dashboard.service
 sudo systemctl start dashboard.service
 ```
 
-> 💡 **Mental note:** To check logs / errors from the Python app:
-> ```bash
-> sudo journalctl -u dashboard.service -f
-> ```
+To monitor the application for errors or debugging output:
+
+```bash
+sudo journalctl -u dashboard.service -f
+```
 
 ---
 
-### 🌳 Git Setup
+### Git Setup
 
-Since I'm managing the entire server through the browser, I thought it'd be convenient to set up Git 🔧 — so I can edit the project using code editors like **VS Code**, then pull changes straight onto the Proxmox server.
+Since the server is managed primarily through the browser, Git was installed to allow the dashboard project to be edited locally in an editor such as VS Code, then synced to the server.
 
-**1️⃣ Install Git and configure identity:**
+**1. Install Git and configure identity:**
 
 ```bash
 apt install -y git
@@ -79,23 +75,27 @@ git config --global user.name "name"
 git config --global user.email "email@example.com"
 ```
 
-**2️⃣ Clone the repository:**
+**2. Clone the repository:**
 
 ```bash
 cd /root
 git clone https://github.com/loucifer-x/dashboard.git dashboard
 ```
 
-**3️⃣ Pull future updates:**
+**3. Pull future updates:**
 
 ```bash
 cd /root/dashboard
 git pull
 ```
 
-This gives me a simple workflow 🔄: edit in my code editor → push to GitHub → `git pull` on the Proxmox server.
+This establishes a simple workflow: edit locally, push to GitHub, then pull the latest changes onto the Proxmox server.
 
 ---
+
+### Status
+
+With the dashboard running as a system service and Git configured for version control, the basic system UI is functional and in place.
 
 ### ✅ Status
 
