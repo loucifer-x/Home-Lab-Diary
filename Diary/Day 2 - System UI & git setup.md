@@ -1,22 +1,39 @@
-# Proxmox Homelab
+# 🖥️ Proxmox Homelab
+## 🚀 Day 2 — System UI & Git Setup
 
-## Day 2 — System UI & Git Setup
+![Proxmox](https://img.shields.io/badge/Proxmox-E57000?style=flat&logo=proxmox&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Systemd](https://img.shields.io/badge/systemd-service-4EAA25?style=flat&logo=linux&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
 
-Going into this project, I already had a good idea of where I wanted to start. I have a spare HDMI touchscreen lying around, and I want to use it as my main **HUB UI**, displaying information such as the IP address, CPU usage, memory usage, and other system statistics.
+---
+
+### 📺 The Idea
+
+Going into this project, I already had a good idea of where I wanted to start. I have a spare HDMI touchscreen lying around, and I want to use it as my main **HUB UI** 🧭 — displaying information such as:
+
+- 🌐 IP address
+- ⚙️ CPU usage
+- 🧠 Memory usage
+- 📊 Other system statistics
 
 I asked Claude AI to generate a simple UI for me. The project can be found on GitHub:
 
-[GitHub — loucifer-x/dashboard](https://github.com/loucifer-x/dashboard?utm_source=chatgpt.com)
+🔗 [**GitHub — loucifer-x/dashboard**](https://github.com/loucifer-x/dashboard)
 
-The next goal was to have the dashboard automatically start when the system boots. Again, this was fairly straightforward.
+---
 
-First, I created a systemd service file:
+### 🔁 Auto-Start on Boot
+
+The next goal was to have the dashboard automatically start when the system boots. This was fairly straightforward using a **systemd service**.
+
+**1️⃣ Create the service file:**
 
 ```bash
 sudo nano /etc/systemd/system/dashboard.service
 ```
 
-I then added the following:
+**2️⃣ Add the following:**
 
 ```ini
 [Unit]
@@ -35,7 +52,7 @@ User=root
 WantedBy=multi-user.target
 ```
 
-I then enabled and started the service:
+**3️⃣ Enable and start the service:**
 
 ```bash
 sudo systemctl daemon-reload
@@ -43,41 +60,45 @@ sudo systemctl enable dashboard.service
 sudo systemctl start dashboard.service
 ```
 
-**Mental note:** If I need to see any errors coming from the Python application, I can check the service logs with:
-
-```bash
-sudo journalctl -u dashboard.service -f
-```
+> 💡 **Mental note:** To check logs / errors from the Python app:
+> ```bash
+> sudo journalctl -u dashboard.service -f
+> ```
 
 ---
 
-### Git
+### 🌳 Git Setup
 
-Since I'm using the web browser to manage the entire server, I thought it would be really convenient to set up Git on the server. This means I can make changes to the project using code editors such as Visual Studio Code and then pull those changes directly onto the Proxmox server.
+Since I'm managing the entire server through the browser, I thought it'd be convenient to set up Git 🔧 — so I can edit the project using code editors like **VS Code**, then pull changes straight onto the Proxmox server.
 
-First, I installed Git and configured my username and email:
+**1️⃣ Install Git and configure identity:**
 
 ```bash
 apt install -y git
-
 git config --global user.name "name"
 git config --global user.email "email@example.com"
 ```
 
-I then cloned the GitHub repository into `/root/dashboard`:
+**2️⃣ Clone the repository:**
 
 ```bash
 cd /root
 git clone https://github.com/loucifer-x/dashboard.git dashboard
 ```
 
-From this point onwards, whenever I want to pull the latest changes from GitHub, I can simply run:
+**3️⃣ Pull future updates:**
 
 ```bash
 cd /root/dashboard
 git pull
 ```
 
-This gives me a simple workflow for managing the dashboard: I can make changes through my editor, push them to GitHub, and then pull the latest version onto the Proxmox server.
+This gives me a simple workflow 🔄: edit in my code editor → push to GitHub → `git pull` on the Proxmox server.
 
-With the dashboard now running automatically as a system service and Git set up for managing the project, the basic system UI is in place.
+---
+
+### ✅ Status
+
+With the dashboard now running automatically as a system service, and Git set up for managing the project, the **basic system UI is in place**. 🎉
+
+**Next up:** kiosk-mode display on the touchscreen 🖼️
