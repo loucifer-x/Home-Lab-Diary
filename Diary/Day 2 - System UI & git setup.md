@@ -49,6 +49,8 @@ sudo systemctl start dashboard.service
 sudo journalctl -u dashboard.service -f
 ```
 
+---
+
 ### Git
 
 Since I'm using the web browser to manage the entire server, I thought it would be really convenient to set up Git on the server. This means I can make changes to the project using code editors such as Visual Studio Code and then pull those changes directly onto the Proxmox server.
