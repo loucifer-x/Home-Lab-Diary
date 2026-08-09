@@ -5,7 +5,7 @@
 
 ---
 
-I primarily use self-hosting to advance my knowledge and skills in cybersecurity. Splunk is a critical tool for blue-team operations because it collects, analyzes, and correlates logs and events from servers, systems, and network devices. This allows security teams to identify suspicious activity, investigate incidents, and develop effective security detections.
+I primarily use self-hosting to advance my knowledge and skills in cybersecurity. Splunk is basically the backbone of any blue-team setup, since it ingests and correlates logs from servers, endpoints, and network gear in one place. That's what lets you actually catch weird activity, dig into incidents, and build out solid detections instead of just guessing.
 
 
 ### Instillation commands 
