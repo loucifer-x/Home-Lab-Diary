@@ -50,6 +50,8 @@ I then installed the `.deb` package using `dpkg`:
 ```bash
 dpkg -i splunk-10.4.2-33c3bf42cd73-linux-amd64.deb
 ```
+Used this command to shorten the splunk CLI command
+
 ```
 echo 'export PATH=$PATH:/opt/splunk/bin' >> ~/.bashrc
 source ~/.bashrc
