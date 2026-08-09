@@ -50,11 +50,14 @@ I then installed the `.deb` package using `dpkg`:
 ```bash
 dpkg -i splunk-10.4.2-33c3bf42cd73-linux-amd64.deb
 ```
-
+```
+echo 'export PATH=$PATH:/opt/splunk/bin' >> ~/.bashrc
+source ~/.bashrc
+```
 ### Starting Splunk
 
 ```bash
-/opt/splunk/bin/splunk start --accept-license
+splunk start --accept-license
 ```
 
 After starting Splunk, I can access the web interface from another machine on my network using:
