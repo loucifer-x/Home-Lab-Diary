@@ -7,6 +7,31 @@
 
 I primarily use self-hosting to advance my knowledge and skills in cybersecurity. Splunk is basically the backbone of any blue-team setup, since it ingests and correlates logs from servers, endpoints, and network gear in one place. That's what lets you actually catch weird activity, dig into incidents, and build out solid detections instead of just guessing.
 
+---
+
+### Current server setup 
+
+                 ┌─────────────────────────┐
+                 │      Your Network       │
+                 │                         │
+                 │           PC            │
+                 └────────────┬────────────┘
+                              │
+                              │ Network
+                              ▼
+                 ┌─────────────────────────┐
+                 │     PROXMOX HOST        │
+                 │                         │
+                 │   192.168.137.179       │
+                 │                         │
+                 │  ┌───────────────────┐  │
+                 │  │      Splunk       │  │
+                 │  │    Enterprise     │  │
+                 │  │     :8000         │  │
+                 │  └───────────────────┘  │
+                 │                         │
+                 └─────────────────────────┘
+                
 
 ### Instillation commands 
 ```
