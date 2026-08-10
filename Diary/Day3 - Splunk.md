@@ -11,11 +11,7 @@ I primarily use self-hosting to advance my knowledge and skills in cybersecurity
 For future VMs that I want to monitor, I will need to install the **Splunk Universal Forwarder**. The Forwarder will collect logs and events from the VM and send them to my main Splunk Enterprise server.
 
 ---
-
-### Current server setup
-
-```text
-### Current server setup
+### Setup overview
 
 ```text
                  ┌─────────────────────────┐     ┌──────────────────────┐
