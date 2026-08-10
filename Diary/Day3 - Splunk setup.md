@@ -91,6 +91,7 @@ First, I created a dedicated log file that could be used to feed the journal dat
 ```
 touch /var/log/proxmox-journal.log
 chmod 644 /var/log/proxmox-journal.log
+journalctl -f -o short-iso >> /var/log/proxmox-journal.log
 ```
 
 After running these commands and then using `logger "SPLUNK_TEST_123"`, Using ```index=* "SPLUNK_TEST_123"``` finally received my first test log in Splunk!
