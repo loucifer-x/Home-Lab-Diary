@@ -1,6 +1,6 @@
 # Proxmox Homelab
 
-## Day 3 — Splunk setup
+## Day 3 — Splunk
 
 ---
 
@@ -17,7 +17,7 @@ For future VMs that I want to monitor, I will need to install the **Splunk Unive
 ```text
                  ┌─────────────────────────┐     ┌──────────────────────┐
                  │       My Network        │     │    Spare Laptop      │
-                 │                         │     │   Pentesting/Debian  │
+                 │                         │     │   Pentesting/Debium  │
                  │          PC             │     └──────────┬───────────┘
                  └────────────┬────────────┘                │
                               │                             │
@@ -51,118 +51,45 @@ I then installed the `.deb` package using `dpkg`:
 dpkg -i splunk-10.4.2-33c3bf42cd73-linux-amd64.deb
 ```
 
-### Shortening the Splunk CLI command
+Used this command to shorten the splunk CLI command
 
-I added Splunk's binary directory to my `$PATH`:
-
-```bash
+```
 echo 'export PATH=$PATH:/opt/splunk/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-This allows me to use:
-
-```bash
-splunk
-```
-
-instead of:
-
-```bash
-/opt/splunk/bin/splunk
-```
-
 ### Starting Splunk
-
-Because Splunk is currently running as root in this lab:
 
 ```bash
 splunk start --accept-license --run-as-root
 ```
 
-After starting Splunk, I can access the web interface from another machine on my network:
+After starting Splunk, I can access the web interface from another machine on my network using:
 
 ```text
 http://192.168.137.179:8000
 ```
 
-### Testing log ingestion
+### Faking an error in logs!
 
-I wanted to test whether Splunk could see a manually generated log event.
+Firstly I set up a dataset | add data -> Monitoring -> Files & Directories -> /var/log
+I sent a fake error using logger to my surprise I couldn't actually find the fake log inside splunk. After some research It turns out that the data inside log splunk couldn't ingest.
+First create a dedicated log file that we can feed from journald
 
-I first configured Splunk to monitor:
-
-```text
-/var/log
 ```
-
-I then generated a test event using:
-
-```bash
-logger "TEST"
-```
-
-However, the event did not appear in Splunk.
-
-After investigating, I found that the Proxmox host uses **systemd-journald** for its system logs rather than a traditional `/var/log/syslog` file. The journal is stored under:
-
-```text
-/var/log/journal/
-```
-
-The journal files are binary databases, so simply monitoring `/var/log` does not make Splunk automatically ingest the journal contents.
-
-For testing, I created a normal text log file:
-
-```bash
 touch /var/log/proxmox-journal.log
 chmod 644 /var/log/proxmox-journal.log
 ```
 
-I then used `journalctl` to output the journal as readable text into the file:
-
-```bash
-journalctl -f -o short-iso >> /var/log/proxmox-journal.log
-```
-
-Because Splunk was already monitoring `/var/log`, it could then read the new text log file.
-
-I generated another test event:
-
-```bash
-logger "TEST"
-```
-
-This time, the event appeared in Splunk.
+After I ran these commands and after logger "TEST" I finally recivded my first evil log!
 
 ### Key takeaway
 
-The important lesson was that **creating a log event and ingesting that event into Splunk are two separate steps**.
+Splunk Enterprise is running directly on my Proxmox host rather than inside a separate VM. Future VMs can use the Splunk Universal Forwarder to send their logs and events back to this central Splunk instance.
 
-My Proxmox host was successfully generating events through `systemd-journald`, but Splunk's normal file monitor could not directly consume the binary journal database.
+---
 
-The test pipeline became:
-
-```text
-Proxmox
-   │
-   ▼
-systemd-journald
-   │
-   ▼
-journalctl
-   │
-   ▼
-/var/log/proxmox-journal.log
-   │
-   ▼
-Splunk Enterprise
-   │
-   ▼
-Splunk Web
-```
-
-Splunk Enterprise is running directly on my Proxmox host rather than inside a separate VM. Future VMs can use the **Splunk Universal Forwarder** to collect their logs and send them back to this central Splunk instance.
+Just in case I forget my login. Username : root | password : guestguestnk Universal Forwarder** to collect their logs and send them back to this central Splunk instance.
 
 ### Security note
 
