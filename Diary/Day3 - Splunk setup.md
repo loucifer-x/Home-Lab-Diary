@@ -1,21 +1,9 @@
 # Proxmox Homelab
-![Proxmox](https://img.shields.io/badge/Proxmox-E57000?style=flat\&logo=proxmox\&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat\&logo=python\&logoColor=white)
+![Splunk](https://img.shields.io/badge/Splunk-000000?style=flat\&logo=splunk\&logoColor=white)
 ![Debian](https://img.shields.io/badge/Debian-A81D33?style=flat\&logo=debian\&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat\&logo=linux\&logoColor=black)
-![Splunk](https://img.shields.io/badge/Splunk-000000?style=flat\&logo=splunk\&logoColor=white)
-![Systemd](https://img.shields.io/badge/systemd-service-4EAA25?style=flat\&logo=linux\&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat\&logo=git\&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat\&logo=github\&logoColor=white)
-![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat\&logo=gnubash\&logoColor=white)
-![SSH](https://img.shields.io/badge/SSH-222222?style=flat\&logo=openssh\&logoColor=white)
-![Networking](https://img.shields.io/badge/Networking-0078D4?style=flat\&logo=cisco\&logoColor=white)
-![Cybersecurity](https://img.shields.io/badge/Cybersecurity-2C2C2C?style=flat\&logo=kalilinux\&logoColor=white)
-![Kali Linux](https://img.shields.io/badge/Kali_Linux-557C94?style=flat\&logo=kalilinux\&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat\&logo=docker\&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat\&logo=nginx\&logoColor=white)
-![Markdown](https://img.shields.io/badge/Markdown-000000?style=flat\&logo=markdown\&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat\&logo=visualstudiocode\&logoColor=white)
+
+
 
 ## Day 3 — Splunk
 
