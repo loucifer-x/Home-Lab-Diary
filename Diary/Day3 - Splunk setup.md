@@ -51,7 +51,7 @@ I then installed the `.deb` package using `dpkg`:
 dpkg -i splunk-10.4.2-33c3bf42cd73-linux-amd64.deb
 ```
 
-Used this command to shorten the splunk CLI command
+Used this command to shorten the Splunk CLI command:
 
 ```
 echo 'export PATH=$PATH:/opt/splunk/bin' >> ~/.bashrc
@@ -72,16 +72,18 @@ http://192.168.137.179:8000
 
 ### Faking an error in logs!
 
-Firstly I set up a dataset | add data -> Monitoring -> Files & Directories -> /var/log
-I sent a fake error using logger to my surprise I couldn't actually find the fake log inside splunk. After some research It turns out that the data inside log splunk couldn't ingest.
-First create a dedicated log file that we can feed from journald
+Firstly, I set up a dataset using **Add Data → Monitoring → Files & Directories → `/var/log`**.
+
+I then sent a fake error using `logger`. To my surprise, I couldn't find the fake log inside Splunk. After investigating, I found that the logs Splunk was monitoring weren't able to ingest the data from `systemd-journald` directly.
+
+First, I created a dedicated log file that could be used to feed the journal data into Splunk:
 
 ```
 touch /var/log/proxmox-journal.log
 chmod 644 /var/log/proxmox-journal.log
 ```
 
-After I ran these commands and after logger "TEST" I finally recivded my first evil log!
+After running these commands and then using `logger "TEST"`, I finally received my first test log in Splunk!
 
 ### Key takeaway
 
@@ -89,9 +91,4 @@ Splunk Enterprise is running directly on my Proxmox host rather than inside a se
 
 ---
 
-Just in case I forget my login. Username : root | password : guestguestnk Universal Forwarder** to collect their logs and send them back to this central Splunk instance.
-
-### Security note
-
-I will **not store my Splunk username or password in this documentation**. Credentials should be stored securely and changed if they have been exposed in a public repository, screenshot, or shared document.
-
+Just in case I forget my login. Username : root | password : guestguest
