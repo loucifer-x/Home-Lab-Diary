@@ -49,7 +49,7 @@ WantedBy=multi-user.target
 
 **3. Enable and start the service:**
 
-```bash
+```ini
 sudo systemctl daemon-reload
 sudo systemctl enable dashboard.service
 sudo systemctl start dashboard.service
@@ -57,7 +57,7 @@ sudo systemctl start dashboard.service
 
 To monitor the application for errors or debugging output:
 
-```bash
+```ini
 sudo journalctl -u dashboard.service -f
 ```
 
