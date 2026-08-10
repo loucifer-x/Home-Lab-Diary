@@ -93,7 +93,7 @@ touch /var/log/proxmox-journal.log
 chmod 644 /var/log/proxmox-journal.log
 ```
 
-After running these commands and then using `logger "TEST"`, Using ```index=* "SPLUNK_TEST_123"``` finally received my first test log in Splunk!
+After running these commands and then using `logger "SPLUNK_TEST_123"`, Using ```index=* "SPLUNK_TEST_123"``` finally received my first test log in Splunk!
 
 ### Key takeaway
 
