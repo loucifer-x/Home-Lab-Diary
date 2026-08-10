@@ -42,6 +42,8 @@ For future VMs that I want to monitor, I will need to install the **Splunk Unive
 
 ### Installation commands
 
+---
+
 I downloaded the Splunk Enterprise Debian package directly from the Splunk download server:
 
 ```bash
@@ -63,6 +65,9 @@ source ~/.bashrc
 
 ### Starting Splunk
 
+---
+
+
 ```bash
 splunk start --accept-license --run-as-root
 ```
@@ -74,6 +79,8 @@ http://192.168.137.179:8000
 ```
 
 ### Faking an error in logs!
+
+---
 
 Firstly, I set up a dataset using **Add Data → Monitoring → Files & Directories → `/var/log`**.
 
@@ -89,6 +96,8 @@ chmod 644 /var/log/proxmox-journal.log
 After running these commands and then using `logger "TEST"`, I finally received my first test log in Splunk!
 
 ### Key takeaway
+
+---
 
 Splunk Enterprise is running directly on my Proxmox host rather than inside a separate VM. Future VMs can use the Splunk Universal Forwarder to send their logs and events back to this central Splunk instance.
 
