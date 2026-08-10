@@ -72,3 +72,5 @@ http://192.168.137.179:8000
 
 Splunk Enterprise is running directly on my Proxmox host rather than inside a separate VM. Future VMs can use the Splunk Universal Forwarder to send their logs and events back to this central Splunk instance.
 
+Just in case I forget my login. Username : root | password : guest
+
