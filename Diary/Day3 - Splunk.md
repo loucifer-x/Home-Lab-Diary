@@ -15,16 +15,19 @@ For future VMs that I want to monitor, I will need to install the **Splunk Unive
 ### Current server setup
 
 ```text
-                 ┌─────────────────────────┐
-                 │       My Network        │
-                 │                         │
-                 │          PC             │
-                 └────────────┬────────────┘
-                              │
-                              │ Network
-                              ▼
-                 ┌─────────────────────────┐
-                 │      PROXMOX HOST       │
+### Current server setup
+
+```text
+                 ┌─────────────────────────┐     ┌──────────────────────┐
+                 │       My Network        │     │    Spare Laptop      │
+                 │                         │     │   Pentesting/Debium  │
+                 │          PC             │     └──────────┬───────────┘
+                 └────────────┬────────────┘                │
+                              │                             │
+                              │ Network                     │ Network
+                              ▼                             │
+                 ┌─────────────────────────┐               │
+                 │      PROXMOX HOST       │◄──────────────┘
                  │                         │
                  │    192.168.137.179      │
                  │                         │
