@@ -1,6 +1,6 @@
 # Proxmox Homelab
 
-## Day 3 — Splunk
+## Day 3 — Splunk setup
 
 ---
 
