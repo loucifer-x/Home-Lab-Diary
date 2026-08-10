@@ -73,5 +73,5 @@ Splunk Enterprise is running directly on my Proxmox host rather than inside a se
 
 ---
 
-Just in case I forget my login. Username : root | password : guest
+Just in case I forget my login. Username : root | password : guestguest
 
