@@ -91,10 +91,57 @@ First, I created a dedicated log file that could be used to feed the journal dat
 ```
 touch /var/log/proxmox-journal.log
 chmod 644 /var/log/proxmox-journal.log
+```
+This command redirects the logs to the new log file.
+```
 journalctl -f -o short-iso >> /var/log/proxmox-journal.log
 ```
 
+
 After running these commands and then using `logger "SPLUNK_TEST_123"`, Using ```index=* "SPLUNK_TEST_123"``` finally received my first test log in Splunk!
+
+
+To make the journal collection permanent, I created a **systemd service** so `journalctl` continues writing to the log file in the background and automatically starts whenever the Proxmox host boots.
+
+First, I created the service:
+
+```bash
+nano /etc/systemd/system/proxmox-journal.service
+```
+
+I then added:
+
+```ini
+[Unit]
+Description=Export Proxmox journal for Splunk
+After=systemd-journald.service
+Requires=systemd-journald.service
+
+[Service]
+ExecStart=/bin/sh -c '/usr/bin/journalctl -f -o short-iso >> /var/log/proxmox-journal.log'
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+After creating the service, I reloaded systemd and enabled the service:
+
+```bash
+systemctl daemon-reload
+systemctl enable --now proxmox-journal.service
+```
+
+I can check that the service is running with:
+
+```bash
+systemctl status proxmox-journal.service
+```
+
+The service now automatically starts when the Proxmox host boots, meaning I no longer need to manually run `journalctl -f` each time.
+
+
 
 ### Key takeaway
 
