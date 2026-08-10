@@ -58,7 +58,7 @@ source ~/.bashrc
 ### Starting Splunk
 
 ```bash
-splunk start --accept-license
+splunk start --accept-license --run-as-root
 ```
 
 After starting Splunk, I can access the web interface from another machine on my network using:
