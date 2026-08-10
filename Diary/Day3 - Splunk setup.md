@@ -1,9 +1,7 @@
 # Proxmox Homelab
+
 ![Splunk](https://img.shields.io/badge/Splunk-000000?style=flat\&logo=splunk\&logoColor=white)
-![Debian](https://img.shields.io/badge/Debian-A81D33?style=flat\&logo=debian\&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat\&logo=linux\&logoColor=black)
-
-
+![Proxmox](https://img.shields.io/badge/Proxmox-E57000?style=flat&logo=proxmox&logoColor=white)
 
 ## Day 3 — Splunk
 
