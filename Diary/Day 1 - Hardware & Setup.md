@@ -37,4 +37,20 @@ The installation process is straightforward and follows a similar flow to instal
 
 ---
 
+### Setup overview
 
+```text
+                 ┌─────────────────────────┐     ┌──────────────────────┐
+                 │       My Network        │     │    Spare Laptop      │
+                 │                         │     │    Pentesting/Kali   │
+                 │          PC             │     └──────────┬───────────┘
+                 └────────────┬────────────┘                │
+                              │                             │
+                              │ Network                     │ Network
+                              ▼                             │
+                 ┌─────────────────────────┐               │
+                 │      PROXMOX HOST       │◄──────────────┘
+                 │                         │
+                 │    192.168.137.179      │
+                 │                         │
+                 └─────────────────────────┘
