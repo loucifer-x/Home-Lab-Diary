@@ -53,13 +53,12 @@ Every diary entry uses a consistent flag system so it's obvious at a glance whet
  
 **When something's broken and I'm actively fixing it:**
  
-```markdown
+
 ![Status](https://img.shields.io/badge/STATUS-BROKEN%20%E2%80%94%20FIXING-red?style=for-the-badge)
  
 > [!CAUTION]
 > **Problem encountered — actively fixing.**
 > Short description of what broke.
-```
  
 **Once it's resolved:**
  
