@@ -47,12 +47,12 @@ This diary is where I track that process — the exploits that landed, the ones 
 
 ---
 
-## 🧩 What's Running
+##  What's Running
 
-- 🎯 **Target VMs** — deliberately vulnerable boxes (Metasploitable, DVWA, HackTheBox-style builds, custom-broken services)
-- 🗡️ **Attacker box** — Kali/Parrot, tooling, C2 frameworks, custom scripts
-- 🕵️ **Blue team stack** — SIEM/logging, IDS/IPS, endpoint monitoring
-- 🧪 **Sandbox/analysis VMs** — isolated environments for malware detonation
+-  **Target VMs** — deliberately vulnerable boxes (Metasploitable, DVWA, HackTheBox-style builds, custom-broken services)
+-  **Attacker box** — Kali/Parrot, tooling, C2 frameworks, custom scripts
+-  **Blue team stack** — SIEM/logging, IDS/IPS, endpoint monitoring
+-  **Sandbox/analysis VMs** — isolated environments for malware detonation
 
 *(Swap in your actual stack as it evolves.)*
 
