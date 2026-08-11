@@ -62,13 +62,13 @@ Every diary entry uses a consistent flag system so it's obvious at a glance whet
  
 **Once it's resolved:**
  
-```markdown
+
 ![Status](https://img.shields.io/badge/STATUS-RESOLVED-brightgreen?style=for-the-badge)
  
 > [!TIP]
 > **Resolved.**
 > Short description of the fix and what caused it.
-```
+
  
 ---
 
