@@ -1,4 +1,4 @@
-# Proxmox Cyber Range — Homelab Diary
+# Homelab Diary(Proxmox)
 
 > *A running log of building, attacking, defending, and instrumenting my own virtual battlefield — one snapshot at a time.*
 
