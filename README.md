@@ -69,15 +69,3 @@ Each entry is a snapshot in time — what I built, what I broke into, what I det
 - **Lessons learned** — CVEs, misconfigs, and rabbit holes worth remembering
 
 ---
-
-## Ground Rules
-
-Everything here happens in an **isolated, segmented lab environment** — no live targets, no production systems, no exceptions. This is a controlled range for learning, not a launchpad.
-
----
-
-##  Follow Along
-
-Whether you're here to learn, replicate the setup, or watch me get owned by my own lab — welcome. Let's see how deep this rabbit hole goes.
-
----
