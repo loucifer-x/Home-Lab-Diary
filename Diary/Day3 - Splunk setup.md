@@ -1,115 +1,80 @@
 # Proxmox Homelab
 
-## Day 3 — Splunk
+## Day 3 — Deploying Splunk & Fixing a Broken Log Pipeline
 
-![Splunk](https://img.shields.io/badge/Splunk-000000?style=flat\&logo=splunk\&logoColor=white)
+![Splunk](https://img.shields.io/badge/Splunk-000000?style=flat&logo=splunk&logoColor=white)
 ![Proxmox](https://img.shields.io/badge/Proxmox-E57000?style=flat&logo=proxmox&logoColor=white)
 
----
-
-I primarily use self-hosting to advance my knowledge and skills in cybersecurity. Splunk is an important tool for blue-team operations because it ingests, searches, and correlates logs from servers, endpoints, and network devices in one place. This allows security teams to identify suspicious activity, investigate incidents, and build effective detections based on actual data rather than guesswork.
-
-### Notes for future virtual machines
-
-For future VMs that I want to monitor, I will need to install the **Splunk Universal Forwarder**. The Forwarder will collect logs and events from the VM and send them to my main Splunk Enterprise server.
+**Skills:** SIEM administration · Linux systemd · log pipeline troubleshooting
 
 ---
 
-### Setup overview
+### Goal
+
+Stand up a central Splunk Enterprise instance on my Proxmox host to begin collecting and correlating logs — the foundation for everything else in this lab, since blue-team work is only as good as the data feeding it.
+
+### Setup
 
 ```text
-                 ┌─────────────────────────┐     ┌──────────────────────┐
-                 │       My Network        │     │    Spare Laptop      │
-                 │                         │     │   Pentesting/Debium  │
-                 │          PC             │     └──────────┬───────────┘
-                 └────────────┬────────────┘                │
-                              │                             │
-                              │ Network                     │ Network
-                              ▼                             │
-                 ┌─────────────────────────┐               │
-                 │      PROXMOX HOST       │◄──────────────┘
-                 │                         │
-                 │    192.168.137.179      │
-                 │                         │
-                 │  ┌───────────────────┐  │
-                 │  │      Splunk       │  │
-                 │  │    Enterprise     │  │
-                 │  │      :8000        │  │
-                 │  └───────────────────┘  │
-                 │                         │
-                 └─────────────────────────┘
+┌─────────────────────────┐     ┌──────────────────────┐
+│       My Network        │     │    Spare Laptop      │
+│          PC             │     │   Pentesting/Debian  │
+└────────────┬────────────┘     └──────────┬───────────┘
+             │                             │
+             │ Network                     │ Network
+             ▼                             │
+┌─────────────────────────┐               │
+│      PROXMOX HOST       │◄──────────────┘
+│    192.168.137.179      │
+│  ┌───────────────────┐  │
+│  │      Splunk       │  │
+│  │    Enterprise     │  │
+│  │      :8000        │  │
+│  └───────────────────┘  │
+└─────────────────────────┘
 ```
 
-### Installation commands
-
----
-
-I downloaded the Splunk Enterprise Debian package directly from the Splunk download server:
+Installed Splunk Enterprise via the official `.deb` package and started the service:
 
 ```bash
 wget -O splunk-10.4.2-33c3bf42cd73-linux-amd64.deb "https://download.splunk.com/products/splunk/releases/10.4.2/linux/splunk-10.4.2-33c3bf42cd73-linux-amd64.deb"
-```
-
-I then installed the `.deb` package using `dpkg`:
-
-```bash
 dpkg -i splunk-10.4.2-33c3bf42cd73-linux-amd64.deb
-```
-
-Used this command to shorten the Splunk CLI command:
-
-```
 echo 'export PATH=$PATH:/opt/splunk/bin' >> ~/.bashrc
 source ~/.bashrc
-```
-
-### Starting Splunk
-
----
-
-
-```bash
 splunk start --accept-license --run-as-root
 ```
 
-After starting Splunk, I can access the web interface from another machine on my network using:
-
-```text
-http://192.168.137.179:8000
-```
-
-### Faking an error in logs!
+Web UI reachable at `http://192.168.137.179:8000`.
 
 ---
 
-Firstly, I set up a dataset using **Add Data → Monitoring → Files & Directories → `/var/log`**.
+![Status](https://img.shields.io/badge/STATUS-BROKEN%20%E2%80%94%20FIXING-red?style=for-the-badge)
 
-I then sent a fake error using `logger`. To my surprise, I couldn't find the fake log inside Splunk. After investigating, I found that the logs Splunk was monitoring weren't able to ingest the data from `systemd-journald` directly.
+> [!CAUTION]
+> **Problem encountered — actively fixing.**
+> Configured Splunk to monitor `/var/log`, sent a test event with `logger`, and it never showed up in Splunk.
 
-First, I created a dedicated log file that could be used to feed the journal data into Splunk:
+### Investigation
 
-```
+I worked backwards from the assumption that `/var/log` monitoring would automatically pick up `systemd-journald` output. It doesn't — `journald` stores logs in its own binary format, not as flat files Splunk's file monitor can tail. Splunk was watching a directory that never actually received the events I was generating.
+
+### Fix
+
+I created a plain-text log file and used `journalctl` to continuously export journal entries into it, giving Splunk something it could actually monitor:
+
+```bash
 touch /var/log/proxmox-journal.log
 chmod 644 /var/log/proxmox-journal.log
-```
-This command redirects the logs to the new log file.
-```
 journalctl -f -o short-iso >> /var/log/proxmox-journal.log
 ```
 
+Re-running `logger "SPLUNK_TEST_123"` and searching `index=* "SPLUNK_TEST_123"` confirmed the fix — first successful test event.
 
-After running these commands and then using `logger "SPLUNK_TEST_123"`, Using ```index=* "SPLUNK_TEST_123"``` finally received my first test log in Splunk!
-
-
-To make the journal collection permanent, I created a **systemd service** so `journalctl` continues writing to the log file in the background and automatically starts whenever the Proxmox host boots.
-
-First, I created the service:
+That fix wouldn't survive a reboot on its own, so I made it persistent with a dedicated `systemd` service:
 
 ```bash
 nano /etc/systemd/system/proxmox-journal.service
 ```
-
-I then added:
 
 ```ini
 [Unit]
@@ -126,29 +91,28 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 
-After creating the service, I reloaded systemd and enabled the service:
-
 ```bash
 systemctl daemon-reload
 systemctl enable --now proxmox-journal.service
-```
-
-I can check that the service is running with:
-
-```bash
 systemctl status proxmox-journal.service
 ```
 
-The service now automatically starts when the Proxmox host boots, meaning I no longer need to manually run `journalctl -f` each time.
+Now the journal export starts automatically on boot and restarts itself if it dies.
 
+![Status](https://img.shields.io/badge/STATUS-RESOLVED-brightgreen?style=for-the-badge)
 
-
-### Key takeaway
-
----
-
-Splunk Enterprise is running directly on my Proxmox host rather than inside a separate VM. Future VMs can use the Splunk Universal Forwarder to send their logs and events back to this central Splunk instance.
+> [!TIP]
+> **Resolved.**
+> `journald`'s binary log format isn't picked up by file monitoring — exporting it to a flat file via a persistent `systemd` service fixed ingestion for good.
 
 ---
 
-Just in case I forget my login. Username : root | password : guestguest
+### Lesson Learned
+
+File-monitoring tools like Splunk's don't natively understand `journald`'s binary log format — anything using `journald` needs an explicit export step before it's visible to a SIEM. This is a common gotcha on any systemd-based Linux system being onboarded into a log pipeline, and it's the kind of detail that's easy to miss until you've hit it once.
+
+### What's Next
+
+- Deploy the **Splunk Universal Forwarder** on future VMs to feed logs back to this central instance
+- Move Splunk into its own dedicated VM rather than running on the Proxmox host directly
+- Build the first saved search / alert on top of this data
