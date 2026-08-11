@@ -4,6 +4,16 @@
 
 ---
 
+## Table of Contents
+
+| Day | Entry | Topic |
+|---|---|---|
+| 1 | [Hardware & Setup](https://github.com/loucifer-x/Home-Lab-Diary/blob/main/Diary/Day%201%20-%20Hardware%20%26%20Setup.md) | Physical build, hardware specs, Proxmox setup |
+| 2 | [System UI & Git Setup](https://github.com/loucifer-x/Home-Lab-Diary/blob/main/Diary/Day%202%20-%20System%20UI%20%26%20git%20setup.md) | Python UI config for main server monitor, s |
+| 3 | [Splunk Setup](https://github.com/loucifer-x/Home-Lab-Diary/blob/main/Diary/Day3%20-%20Splunk%20setup.md) | SIEM deployment |
+
+---
+
 ## What Is This?
 
 This repository is my personal logbook for everything happening on my **Proxmox VE cyber range** — a self-hosted lab for offensive security practice, defensive engineering, malware analysis, and general "what happens if I poke this" research.
