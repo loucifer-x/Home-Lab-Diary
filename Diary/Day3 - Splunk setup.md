@@ -111,8 +111,3 @@ Now the journal export starts automatically on boot and restarts itself if it di
 
 File-monitoring tools like Splunk's don't natively understand `journald`'s binary log format — anything using `journald` needs an explicit export step before it's visible to a SIEM. This is a common gotcha on any systemd-based Linux system being onboarded into a log pipeline, and it's the kind of detail that's easy to miss until you've hit it once.
 
-### What's Next
-
-- Deploy the **Splunk Universal Forwarder** on future VMs to feed logs back to this central instance
-- Move Splunk into its own dedicated VM rather than running on the Proxmox host directly
-- Build the first saved search / alert on top of this data
