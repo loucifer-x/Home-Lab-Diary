@@ -47,6 +47,33 @@ This diary is where I track that process — the exploits that landed, the ones 
 
 ---
 
+##  Status Indicators
+ 
+Every diary entry uses a consistent flag system so it's obvious at a glance whether something's broken, being fixed, or resolved.
+ 
+**When something's broken and I'm actively fixing it:**
+ 
+```markdown
+![Status](https://img.shields.io/badge/STATUS-BROKEN%20%E2%80%94%20FIXING-red?style=for-the-badge)
+ 
+> [!CAUTION]
+> **Problem encountered — actively fixing.**
+> Short description of what broke.
+```
+ 
+**Once it's resolved:**
+ 
+```markdown
+![Status](https://img.shields.io/badge/STATUS-RESOLVED-brightgreen?style=for-the-badge)
+ 
+> [!TIP]
+> **Resolved.**
+> Short description of the fix and what caused it.
+```
+ 
+---
+
+
 ##  What's Running
 
 -  **Target VMs** — deliberately vulnerable boxes (Metasploitable, DVWA, HackTheBox-style builds, custom-broken services)
